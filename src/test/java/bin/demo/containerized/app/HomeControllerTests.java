@@ -26,8 +26,8 @@ class HomeControllerTests {
     @Test
     void testListProducts() {
         //
-        Product product1 = new Product(1, "Iphone", "Apple phone", 300.0);
-        Product product2 = new Product(2, "Samsung", "Samsung phone", 300.0);
+        Product product1 = new Product("Iphone", "Apple phone", 300.0);
+        Product product2 = new Product("Samsung", "Samsung phone", 300.0);
         when(productRepository.findAll()).thenReturn(List.of(product1, product2));
         List<Product> actual = homeController.listProducts();
         assertEquals(2, actual.size());

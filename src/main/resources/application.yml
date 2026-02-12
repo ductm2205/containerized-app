@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: demo-containerized-app
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?createIfNotExist=true
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+  devtools:
+    restart:
+      enabled: true
+      poll-interval: 2s
+      quiet-period: 1s
+    livereload:
+      enabled: true
+
+logging:
+  level:
+    web: DEBUG
+    org:
+      springframework:
+        transaction: DEBUG
+        security: DEBUG
+      hibernate:
+        SQL: DEBUG
+
+server:
+  port: 8080

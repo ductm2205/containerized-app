@@ -1,8 +1,6 @@
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ductm2205/server:${IMAGE_TAG}
     container_name: server
     ports:
       - "${APPLICATION_PORT}:8080"

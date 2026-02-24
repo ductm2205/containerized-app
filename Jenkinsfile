@@ -61,13 +61,14 @@ pipeline {
             }
         }
      
-        post {
-            success {
-                echo "Deployment successful: ${IMAGE_NAME}:${IMAGE_TAG}"
-            }
-            failure {
-                echo "Pipeline failed"
-            }
+    }
+    
+    post {
+        success {
+            echo "Deployment successful: ${IMAGE_NAME}:${IMAGE_TAG}"
+        }
+        failure {
+            echo "Pipeline failed"
         }
     }
 }

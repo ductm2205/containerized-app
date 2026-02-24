@@ -49,7 +49,7 @@ pipeline {
 
         stage('Deploy to EC2') {
             steps {
-                sshagent(['deploy-ssh']) {
+                sshagent(['agent-server']) {
                     sh """
                       ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
                         export IMAGE_TAG=${IMAGE_TAG} &&

@@ -19,5 +19,11 @@ pipeline {
                 checkout scm
             }
         }
+
+        stage('Build JAR') {
+            steps {
+                sh 'mvnw clean package -DskipTests'
+            }
+        }
     }
 }

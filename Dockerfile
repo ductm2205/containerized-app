@@ -6,7 +6,7 @@
 FROM eclipse-temurin:17-jre-noble
 WORKDIR /app
 
-RUN addgroup --system spring && adduser --system -G spring spring
+RUN addgroup --system spring && adduser --system --group spring spring
 USER spring:spring
 
 # COPY --from=build /app/Atarget/*.jar app.jar

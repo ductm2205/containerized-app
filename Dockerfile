@@ -10,7 +10,7 @@ RUN addgroup --system spring && adduser --system --group spring
 USER spring
 
 # COPY --from=build /app/Atarget/*.jar app.jar
-COPY /target/*.jar app.jar
+COPY target/*.jar app.jar
 
 EXPOSE 8080
 ENTRYPOINT [ "java", "-jar", "app.jar" ]

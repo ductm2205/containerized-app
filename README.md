@@ -1,5 +1,7 @@
 # DEMO SPRING BOOT + DOCKER
 
+This project is a demo for creating a pipeline on Jenkins with AWS
+
 ## Prequisites
 
 You need these installed on your system to run this project

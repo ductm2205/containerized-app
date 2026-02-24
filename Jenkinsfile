@@ -14,16 +14,23 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+        // stage('Checkout') {
+        //     steps {
+        //         checkout scm
+        //     }
+        // }
 
         stage('Build JAR') {
             steps {
                 sh 'mvn clean package -DskipTests'
             }
         }
+
+        stage('Build Docker image') {
+            steps {
+                sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
+            }
+        }
+
     }
 }

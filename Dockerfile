@@ -5,6 +5,7 @@
 
 FROM eclipse-temurin:17-jre-noble
 WORKDIR /app
+
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring
 

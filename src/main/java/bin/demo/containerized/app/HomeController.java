@@ -16,8 +16,14 @@ public class HomeController {
         this.productRepository = productRepository;
     }
 
-    @GetMapping()
+    @GetMapping("/products")
     public List<Product> listProducts() {
         return this.productRepository.findAll();
     }
+
+    @GetMapping()
+    public String hello() {
+        return "Hello, world!";
+    }
+
 }

@@ -28,7 +28,7 @@ pipeline {
 
         stage('Build Docker image') {
             steps {
-                sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
+                sh 'sudo docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
             }
         }
 

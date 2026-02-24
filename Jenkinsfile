@@ -10,7 +10,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'ductm2205/demo-spring'
         IMAGE_TAG = "${GIT_COMMIT.take(7)}"
-        DEPLOY_HOST = 'ec2-user@10.0.1.40'
+        DEPLOY_HOST = 'ec2-user@10.0.1.253'
     }
 
     stages {
@@ -47,5 +47,27 @@ pipeline {
             }
         }
 
+        stage('Deploy to EC2') {
+            steps {
+                sshagent(['deploy-ssh']) {
+                    sh """
+                      ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
+                        export IMAGE_TAG=${IMAGE_TAG} &&
+                        docker compose pull &&
+                        docker compose up -d
+                      '
+                    """
+                }
+            }
+        }
+     
+        post {
+            success {
+                echo "Deployment successful: ${IMAGE_NAME}:${IMAGE_TAG}"
+            }
+            failure {
+                echo "Pipeline failed"
+            }
+        }
     }
 }

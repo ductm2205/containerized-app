@@ -2,7 +2,7 @@ spring:
   application:
     name: demo-containerized-app
   datasource:
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?createIfNotExist=true
+    url: jdbc:mysql://mysql:${DB_PORT}/${DB_NAME}?createIfNotExist=true
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver

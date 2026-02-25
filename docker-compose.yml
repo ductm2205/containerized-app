@@ -1,6 +1,6 @@
 services:
   app:
-    image: ductm2205/server:${IMAGE_TAG}
+    image: ductm2205/demo-spring:${IMAGE_TAG}
     container_name: server
     ports:
       - "8080:8080"

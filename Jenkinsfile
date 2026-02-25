@@ -54,7 +54,6 @@ pipeline {
                       ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
                         cd /opt/app &&
                         git pull origin main &&
-                        chmod +x deploy.sh &&
                       ./deploy.sh
                       '
                     """

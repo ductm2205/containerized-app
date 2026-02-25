@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-cd /opt/app
-git pull origin main
 
 export IMAGE_TAG=${IMAGE_TAG}
 

@@ -52,6 +52,8 @@ pipeline {
                 sshagent(['agent-server']) {
                     sh """
                       ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
+                        cd /opt/app &&
+                        git pull origin main &&
                       ./deploy.sh
                       '
                     """

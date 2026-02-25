@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-SECRET=$(aws secretsmanager get-secret-value \
+SECRET_JSON=$(aws secretsmanager get-secret-value \
   --secret-id prod/app/mysql \
   --query SecretString \
   --output text)

@@ -15,9 +15,9 @@ services:
   mysql:
     image: mysql:8
     container_name: database
-    # environment:
-    #   MYSQL_DATABASE: demo-db
-    #   MYSQL_ROOT_PASSWORD: root
+    environment:
+      #   MYSQL_DATABASE: demo-db
+      MYSQL_ROOT_PASSWORD: root
     #   MYSQL_USER: spring
     #   MYSQL_PASSWORD: 1234
     restart: unless-stopped

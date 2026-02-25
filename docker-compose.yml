@@ -3,7 +3,7 @@ services:
     image: ductm2205/server:${IMAGE_TAG}
     container_name: server
     ports:
-      - "${APPLICATION_PORT}:8080"
+      - "8080:8080"
     depends_on:
       mysql:
         condition: service_healthy
@@ -16,20 +16,20 @@ services:
     image: mysql:8
     container_name: database
     environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: demo-db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: spring
+      MYSQL_PASSWORD: 1234
     restart: unless-stopped
 
     volumes:
       - mysql:/var/lib/mysql/
     ports:
-      - "${MYSQL_PORT}:${MYSQL_PORT}"
+      - "3306:3306"
     env_file:
       - .env
     healthcheck:
-      test: [ "CMD-SHELL", "mysqladmin ping -h localhost -p${MYSQL_ROOT_PASSWORD}" ]
+      test: [ "CMD-SHELL", "mysqladmin ping -h localhost -proot" ]
       interval: 10s
       timeout: 5s
       retries: 5

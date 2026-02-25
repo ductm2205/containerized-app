@@ -6,11 +6,13 @@ SECRET=$(aws secretsmanager get-secret-value \
   --query SecretString \
   --output text)
 
-export DB_HOST=$(echo $SECRET | jq -r .host)
-export DB_PORT=$(echo $SECRET | jq -r .port)
-export DB_NAME=$(echo $SECRET | jq -r .dbname)
-export DB_USER=$(echo $SECRET | jq -r .username)
-export DB_PASSWORD=$(echo $SECRET | jq -r .password)
+cat <<EOF > .env
+DB_HOST=$(echo $SECRET_JSON | jq -r .host)
+DB_PORT=$(echo $SECRET_JSON | jq -r .port)
+DB_NAME=$(echo $SECRET_JSON | jq -r .dbname)
+DB_USER=$(echo $SECRET_JSON | jq -r .username)
+DB_PASSWORD=$(echo $SECRET_JSON | jq -r .password)
+EOF
 
 docker compose pull
 docker compose up -d

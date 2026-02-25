@@ -52,11 +52,7 @@ pipeline {
                 sshagent(['agent-server']) {
                     sh """
                       ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
-                      cd /opt/app &&
-                      git pull origin main &&
-                        export IMAGE_TAG=${IMAGE_TAG} &&
-                        docker compose pull &&
-                        docker compose up -d
+                      ./deploy.sh
                       '
                     """
                 }

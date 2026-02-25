@@ -7,27 +7,27 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
     networks:
       - spring_demo
 
   mysql:
     image: mysql:8
     container_name: database
-    environment:
-      MYSQL_DATABASE: demo-db
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: spring
-      MYSQL_PASSWORD: 1234
+    # environment:
+    #   MYSQL_DATABASE: demo-db
+    #   MYSQL_ROOT_PASSWORD: root
+    #   MYSQL_USER: spring
+    #   MYSQL_PASSWORD: 1234
     restart: unless-stopped
 
     volumes:
       - mysql:/var/lib/mysql/
     ports:
       - "3306:3306"
-  #   # env_file:
-  #     # - .env
+    env_file:
+      - .env
     healthcheck:
       test: [ "CMD-SHELL", "mysqladmin ping -h localhost -p${MYSQL_ROOT_PASSWORD}" ]
       interval: 10s

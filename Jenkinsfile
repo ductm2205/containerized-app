@@ -53,7 +53,7 @@ pipeline {
                     sh """
                       ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
                       cd /opt/app &&
-                      git pull main &&
+                      git pull origin main &&
                         export IMAGE_TAG=${IMAGE_TAG} &&
                         docker compose pull &&
                         docker compose up -d

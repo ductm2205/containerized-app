@@ -1,10 +1,6 @@
 #!/bin/bash
 set -e
 
-
-export IMAGE_TAG=${IMAGE_TAG}
-
-
 SECRET=$(aws secretsmanager get-secret-value \
   --secret-id prod/app/mysql \
   --query SecretString \

@@ -57,7 +57,7 @@ pipeline {
                         cd /opt/app
 
                         if [ ! -d ".git" ]; then
-                            git clone --depth 1 https://github.com/ductm2205/containerized.app.git .
+                            sudo git clone --depth 1 https://github.com/ductm2205/containerized.app.git .
                         fi
 
                         git fetch --all

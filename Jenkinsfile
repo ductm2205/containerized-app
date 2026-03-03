@@ -51,13 +51,16 @@ pipeline {
             steps {
                 sshagent(['agent-server']) {
                     sh """
-                        pwd
                       ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
                         export IMAGE_TAG=${IMAGE_TAG}
                         mkdir -p /opt/app
+                        '
+                        scp docker-compose.yml ${DEPLOY_HOST}:/opt/app
+                      ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
+                        export IMAGE_TAG=${IMAGE_TAG}
                         cd /opt/app
                         ./deploy.sh
-                    '
+                        '
                     """
                 }
             }

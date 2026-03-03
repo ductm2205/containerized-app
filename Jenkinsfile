@@ -53,13 +53,13 @@ pipeline {
                     sh """
                       ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
                         export IMAGE_TAG=${IMAGE_TAG}
-                        mkdir -p /opt/app
+                        mkdir -p ~/app
                         '
-                        scp docker-compose.yml ${DEPLOY_HOST}:/opt/app
-                        scp deploy.sh ${DEPLOY_HOST}:/opt/app
+                        scp docker-compose.yml ${DEPLOY_HOST}:~/app
+                        scp deploy.sh ${DEPLOY_HOST}:~/app
                       ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
                         export IMAGE_TAG=${IMAGE_TAG}
-                        cd /opt/app
+                        cd ~/app
                         ./deploy.sh
                         '
                     """

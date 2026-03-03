@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
+
 @RestController
 public class HomeController {
     private final ProductRepository productRepository;
@@ -20,6 +21,12 @@ public class HomeController {
     public List<Product> listProducts() {
         return this.productRepository.findAll();
     }
+
+    @GetMapping("/docker")
+    public String helloDocke() {
+        return "Hello from Docker!";
+    }
+    
 
     @GetMapping()
     public String hello() {

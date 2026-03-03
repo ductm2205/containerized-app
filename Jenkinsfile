@@ -53,6 +53,7 @@ pipeline {
                     sh """
                       ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
                         export IMAGE_TAG=${IMAGE_TAG} &&
+                        mkdir -p /opt/app
                         cd /opt/app &&
                         git pull origin main &&
                       ./deploy.sh

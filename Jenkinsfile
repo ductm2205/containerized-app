@@ -51,19 +51,11 @@ pipeline {
             steps {
                 sshagent(['agent-server']) {
                     sh """
+                        pwd
                       ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
                         export IMAGE_TAG=${IMAGE_TAG}
                         mkdir -p /opt/app
                         cd /opt/app
-
-                        if [ ! -d ".git" ]; then
-                            sudo git clone --depth 1 https://github.com/ductm2205/containerized.app.git .
-                        fi
-
-                        git fetch --all
-                        git reset --hard origin/main
-                        git clean -fd
-
                         ./deploy.sh
                     '
                     """

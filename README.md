@@ -17,7 +17,7 @@ Follow these:
 
     1. Create a copy of .env.example named .env, then fill in your configuration
     
-        ```sh
+        ```
             cp .env.example .env
         ```
     2. Run the project using maven or Docker

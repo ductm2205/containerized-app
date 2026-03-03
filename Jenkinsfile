@@ -52,12 +52,20 @@ pipeline {
                 sshagent(['agent-server']) {
                     sh """
                       ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
-                        export IMAGE_TAG=${IMAGE_TAG} &&
+                        export IMAGE_TAG=${IMAGE_TAG}
                         mkdir -p /opt/app
-                        cd /opt/app &&
-                        git pull origin main &&
-                      ./deploy.sh
-                      '
+                        cd /opt/app
+                    
+                        if [ ! -d ".git" ]; then
+                            git clone --depth 1 https://github.com/your-org/your-repo.git . || git clone git@github.com:your-org/your-repo.git .
+                        fi
+                    
+                        git fetch --all
+                        git reset --hard origin/main
+                        git clean -fd
+                    
+                        ./deploy.sh
+                    '
                     """
                 }
             }

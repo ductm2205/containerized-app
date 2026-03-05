@@ -20,3 +20,5 @@ Follow these:
         cp .env.example .env
 
 2. Run the project using maven or Docker
+
+        docker-compose up -d

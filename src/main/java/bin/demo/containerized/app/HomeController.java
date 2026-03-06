@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 @RestController
 public class HomeController {
     private final ProductRepository productRepository;
@@ -24,9 +23,13 @@ public class HomeController {
 
     @GetMapping("/docker")
     public String helloDocke() {
-        return "Hello from Docker!";
+        return "Hello from Docker!\n";
     }
-    
+
+    @GetMapping("/demo")
+    public String demoWebhook() {
+        return "Demo auto build\n";
+    }
 
     @GetMapping()
     public String hello() {

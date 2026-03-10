@@ -52,7 +52,6 @@ pipeline {
                 sshagent(['agent-server']) {
                     sh """
                       ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
-                        export IMAGE_TAG=${IMAGE_TAG}
                         mkdir -p ~/app
                         '
                         scp docker-compose.yml ${DEPLOY_HOST}:~/app

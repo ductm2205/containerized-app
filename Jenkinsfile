@@ -71,6 +71,7 @@ pipeline {
                 sh """
                 aws lambda invoke \
                 --function-name deployer \
+                --cli-binary-format raw-in-base64-out \
                 --payload '{
                     "image": "${IMAGE_NAME}",
                     "tag": "${IMAGE_TAG}"

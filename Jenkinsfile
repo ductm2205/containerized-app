@@ -69,8 +69,6 @@ pipeline {
         stage('Trigger Deployment') {
             steps {
                 sh """
-                cd ~/app \
-                export IMAGE_TAG=${IMAGE_TAG} \
                 aws lambda invoke \
                 --function-name deployer \
                 --cli-binary-format raw-in-base64-out \

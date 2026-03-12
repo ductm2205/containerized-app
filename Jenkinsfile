@@ -10,7 +10,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'ductm2205/demo-spring'
         IMAGE_TAG = "${GIT_COMMIT.take(7)}"
-        DEPLOY_HOST = 'ec2-user@10.0.1.159'
+        DEPLOY_HOST = 'ec2-user@10.0.1.222'
     }
 
     stages {

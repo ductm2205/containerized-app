@@ -2,7 +2,7 @@
 set -e
 
 SECRET_JSON=$(aws secretsmanager get-secret-value \
-  --secret-id dev/database \
+  --secret-id dev/app/database \
   --query SecretString \
   --output text)
 

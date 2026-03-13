@@ -11,6 +11,7 @@ pipeline {
         IMAGE_NAME = 'ductm2205/demo-spring'
         IMAGE_TAG = "${GIT_COMMIT.take(7)}"
         DEPLOY_HOST = 'ec2-user@10.0.1.166'
+        INSTANCE_ID = 'i-0b2fcf6fe3491d322'
     }
 
     stages {
@@ -75,7 +76,8 @@ pipeline {
                 --payload '{
                     "name": "${IMAGE_NAME}",
                     "tag": "${IMAGE_TAG}",
-                    "region": "us-east-1"
+                    "region": "us-east-1",
+                    "instanceId": "${INSTANCE_ID}"
                 }' \
                 response.json
                 '''

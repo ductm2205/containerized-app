@@ -47,24 +47,24 @@ pipeline {
             }
         }
 
-        stage('Deploy to EC2') {
-            steps {
-                sshagent(['agent-server']) {
-                    sh """
-                      ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
-                        mkdir -p ~/app
-                        '
-                        scp docker-compose.yml ${DEPLOY_HOST}:~/app
-                        scp deploy.sh ${DEPLOY_HOST}:~/app
-                      ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
-                        export IMAGE_TAG=${IMAGE_TAG}
-                        cd ~/app
-                        ./deploy.sh
-                        '
-                    """
-                }
-            }
-        }
+        // stage('Deploy to EC2') {
+        //     steps {
+        //         sshagent(['agent-server']) {
+        //             sh """
+        //               ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
+        //                 mkdir -p ~/app
+        //                 '
+        //                 scp docker-compose.yml ${DEPLOY_HOST}:~/app
+        //                 scp deploy.sh ${DEPLOY_HOST}:~/app
+        //               ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
+        //                 export IMAGE_TAG=${IMAGE_TAG}
+        //                 cd ~/app
+        //                 ./deploy.sh
+        //                 '
+        //             """
+        //         }
+        //     }
+        // }
 
         stage('Trigger Deployment') {
             steps {

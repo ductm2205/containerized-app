@@ -73,7 +73,7 @@ pipeline {
                 --function-name deployer \
                 --cli-binary-format raw-in-base64-out \
                 --payload '{
-                    "image": "${IMAGE_NAME}",
+                    "name": "${IMAGE_NAME}",
                     "tag": "${IMAGE_TAG}",
                     "region": "us-east-1"
                 }' \

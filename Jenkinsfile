@@ -10,7 +10,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'ductm2205/demo-spring'
         IMAGE_TAG = "${GIT_COMMIT.take(7)}"
-        DEPLOY_HOST = 'ec2-user@10.0.1.135'
+        DEPLOY_HOST = 'ec2-user@10.0.1.183'
     }
 
     stages {
@@ -47,37 +47,38 @@ pipeline {
             }
         }
 
-        // stage('Deploy to EC2') {
-        //     steps {
-        //         sshagent(['agent-server']) {
-        //             sh """
-        //               ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
-        //                 mkdir -p ~/app
-        //                 '
-        //                 scp docker-compose.yml ${DEPLOY_HOST}:~/app
-        //                 scp deploy.sh ${DEPLOY_HOST}:~/app
-        //               ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
-        //                 export IMAGE_TAG=${IMAGE_TAG}
-        //                 cd ~/app
-        //                 ./deploy.sh
-        //                 '
-        //             """
-        //         }
-        //     }
-        // }
-     
+        stage('Deploy to EC2') {
+            steps {
+                sshagent(['agent-server']) {
+                    sh """
+                      ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
+                        mkdir -p ~/app
+                        '
+                        scp docker-compose.yml ${DEPLOY_HOST}:~/app
+                        scp deploy.sh ${DEPLOY_HOST}:~/app
+                      ssh -o StrictHostKeyChecking=no ${DEPLOY_HOST} '
+                        export IMAGE_TAG=${IMAGE_TAG}
+                        cd ~/app
+                        ./deploy.sh
+                        '
+                    """
+                }
+            }
+        }
+
         stage('Trigger Deployment') {
             steps {
-                sh """
+                sh '''
                 aws lambda invoke \
                 --function-name deployer \
                 --cli-binary-format raw-in-base64-out \
                 --payload '{
                     "image": "${IMAGE_NAME}",
-                    "tag": "${IMAGE_TAG}"
+                    "tag": "${IMAGE_TAG}",
+                    "region": "us-east-1"
                 }' \
                 response.json
-                """
+                '''
             }
         }
     }
